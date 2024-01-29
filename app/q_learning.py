@@ -2,6 +2,48 @@ import streamlit as st
 import pandas as pd
 import random
 
+
+# CSS to inject contained in a string
+title_css = """
+<style>
+    .title {
+        font-family: 'Arial', sans-serif; /* You can change the font family */
+        color: #000080; /* Change the color */
+        font-size: 40px; /* Change the font size */
+        text-shadow: 2px 2px 5px #7f7f7f; /* Add text shadow */
+        background-color: #f0f0f0; /* Background color */
+        padding: 10px; /* Padding around text */
+        border-radius: 10px; /* Rounded corners */
+        font-weight: bold; /* Font weight */
+        margin: 20px; /* External spacing */
+        text-align: center;
+    }
+</style>
+"""
+
+# Applying CSS to the title
+st.markdown(title_css, unsafe_allow_html=True)
+st.markdown("<div class='title'>Q-Learning Table for Job Match Score</div>",
+            unsafe_allow_html=True)
+
+
+st.markdown("""
+#### Q-Learning Overview
+- **State (S)**: Represents the current situation of the agent.
+- **Action (A)**: The choices that the agent can make in a state.
+- **Reward (R)**: A signal received after taking an action in a state.
+- **Q-value (Q(s, a))**: A function representing the quality of an action in a state.
+- **Q-Table**: Matrix with rows for each state and columns for each action, containing Q-values.
+- **Algorithm**:
+  - *Initialization*: Start with an arbitrary Q-table (usually zero values).
+  - *Action Selection*: Random selection, exploitation (highest Q-value), or exploration (e.g., ε-greedy method).
+  - *Perform Action & Observe Reward*: Transition to a new state after action.
+  - *Update Q-Value*: Using the Q-value update rule.
+""", unsafe_allow_html=True)
+
+st.image("https://huggingface.co/blog/assets/73_deep_rl_q_part2/Q-learning-8.jpg",
+         caption="Q-Learning Process", use_column_width=True)
+
 # Function to initialize the Q-table
 
 
@@ -15,10 +57,6 @@ def update_q_table(q_table, state, action, reward, alpha, gamma):
     max_next_q = max(q_table[state].values())
     q_table[state][action] = q_table[state][action] + alpha * \
         (reward + gamma * max_next_q - q_table[state][action])
-
-
-# Streamlit app title
-st.title("Q-Learning Table for Job Match Score")
 
 
 # Custom styles for the app
