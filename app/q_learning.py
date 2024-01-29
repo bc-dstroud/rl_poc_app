@@ -20,10 +20,6 @@ def update_q_table(q_table, state, action, reward, alpha, gamma):
 # Streamlit app title
 st.title("Q-Learning Table for Job Match Score")
 
-# Display the Q-Learning equation image
-# Ensure this is the correct path where you have saved your image
-image_path = 'q_learning_equation.png'
-st.image(image_path, caption='The Q-Learning equation')
 
 # Custom styles for the app
 st.markdown("""
